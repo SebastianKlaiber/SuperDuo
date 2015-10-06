@@ -8,4 +8,10 @@
     <dimen name="Score">30sp</dimen>
     <dimen name="League">15sp</dimen>
     <dimen name="share_button">120dp</dimen>
+
+    <dimen name="widget_today_default_width">216dp</dimen>
+    <dimen name="widget_today_default_height">144dp</dimen>
+    <dimen name="widget_today_min_resize_width">40dp</dimen>
+    <dimen name="widget_today_min_resize_height">@dimen/widget_today_default_height</dimen>
+    <dimen name="widget_today_large_width">220dp</dimen>
 </resources>

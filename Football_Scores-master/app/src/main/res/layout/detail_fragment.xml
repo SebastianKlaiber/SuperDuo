@@ -46,7 +46,8 @@
             android:paddingLeft="@dimen/share_button"
             android:paddingRight="@dimen/share_button"
             android:paddingStart="@dimen/share_button"
-            android:paddingEnd="@dimen/share_button" />
+            android:paddingEnd="@dimen/share_button"
+            android:contentDescription="@string/share_button_desc"/>
     </FrameLayout>
 
 </LinearLayout>
