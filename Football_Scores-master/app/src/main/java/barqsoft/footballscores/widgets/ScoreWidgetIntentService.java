@@ -7,7 +7,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -52,11 +51,13 @@ public class ScoreWidgetIntentService extends IntentService {
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this,
                 ScoreWidget.class));
 
-        Uri dateUri = DatabaseContract.scores_table.buildScoreWithDate();
-
-        String[] date = new String[1];
-        date[0] = Utilies.formatDate(0);
-        Cursor cursor = getContentResolver().query(dateUri, SCORE_COL, DatabaseContract.PATH_DATE, date, null);
+        Cursor cursor = getContentResolver().query(
+                DatabaseContract.scores_table.buildScoreWithDate()
+                ,SCORE_COL
+                ,DatabaseContract.PATH_DATE
+                ,new String[]{Utilies.formatDate()}
+                ,null
+        );
 
         if (cursor == null) {
             return;

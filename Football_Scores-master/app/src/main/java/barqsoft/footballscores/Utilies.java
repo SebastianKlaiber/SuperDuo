@@ -88,8 +88,8 @@ public class Utilies
         }
     }
 
-    public static String formatDate(int offSet) {
-        Date date = new Date(System.currentTimeMillis() + (offSet * 86400000));
+    public static String formatDate() {
+        Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }

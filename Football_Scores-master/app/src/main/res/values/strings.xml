@@ -45,4 +45,6 @@
     <string name="score" translatable="false">Scores</string>
     <string name="widget_title">Game Score</string>
     <string name="widget_desc">teams</string>
+    <string name="title_widget_detail">Scores Details</string>
+    <string name="empty_scores_list">No Games!</string>
 </resources>
