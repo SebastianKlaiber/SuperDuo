@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     private final String TAG = MainActivity.class.getSimpleName();
 
+    public static final String KEY = "barcode";
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -188,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         if (data != null) {
             AddBook fragment = (AddBook) getSupportFragmentManager().findFragmentById(R.id.container);
-            fragment.scanISBN(data.getStringExtra("barcode"));
+            fragment.scanISBN(data.getStringExtra(KEY));
         }
     }
 }

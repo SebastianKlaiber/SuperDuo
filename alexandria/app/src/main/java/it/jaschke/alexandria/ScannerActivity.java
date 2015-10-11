@@ -45,7 +45,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         Log.v(TAG, result.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
         Intent data = new Intent();
-        data.putExtra("barcode", result.getText());
+        data.putExtra(MainActivity.KEY, result.getText());
         setResult(CommonStatusCodes.SUCCESS, data);
         finish();
     }
