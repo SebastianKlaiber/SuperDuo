@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
-import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -29,8 +28,6 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             DatabaseContract.scores_table.AWAY_COL,
             DatabaseContract.scores_table.HOME_GOALS_COL,
             DatabaseContract.scores_table.AWAY_GOALS_COL,
-            DatabaseContract.scores_table.MATCH_ID,
-            DatabaseContract.scores_table.LEAGUE_COL,
     };
 
     public static final int COL_HOME = 1;
@@ -90,18 +87,11 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
 
                 RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_detail_list_item);
 
-                String homeTeam = data.getString(COL_HOME);
-                String awayTeam = data.getString(COL_AWAY);
-                int goalHomeTeam = data.getInt(COL_HOME_GOAL);
-                int goalAwayTeam = data.getInt(COL_AWAY_GOAL);
+                views.setTextViewText(R.id.home_name, data.getString(COL_HOME));
+                views.setTextViewText(R.id.away_name, data.getString(COL_AWAY));
 
-                views.setTextViewText(R.id.home_name, homeTeam);
-                views.setTextViewText(R.id.away_name, awayTeam);
-
-                Log.d(LOG_TAG, String.valueOf(goalHomeTeam));
-
-                views.setTextViewText(R.id.home_score, String.valueOf(goalHomeTeam));
-                views.setTextViewText(R.id.away_score, String.valueOf(goalAwayTeam));
+                views.setTextViewText(R.id.home_score, String.valueOf(data.getInt(COL_HOME_GOAL)));
+                views.setTextViewText(R.id.away_score, String.valueOf(data.getInt(COL_AWAY_GOAL)));
 
                 Intent fillInIntent = new Intent();
                 Uri uri = DatabaseContract.scores_table.buildScoreWithDate();

@@ -29,17 +29,13 @@ public class ScoreWidgetIntentService extends IntentService {
             DatabaseContract.scores_table.AWAY_COL,
             DatabaseContract.scores_table.HOME_GOALS_COL,
             DatabaseContract.scores_table.AWAY_GOALS_COL,
-            DatabaseContract.scores_table.MATCH_ID,
-            DatabaseContract.scores_table.LEAGUE_COL,
     };
 
-    public static final int COL_DATE = 0;
     public static final int COL_HOME = 1;
     public static final int COL_AWAY = 2;
     public static final int COL_HOME_GOAL = 3;
     public static final int COL_AWAY_GOAL = 4;
-    public static final int MATCH_ID = 5;
-    public static final int COL_LEAGUE = 6;
+
 
     public ScoreWidgetIntentService() {
         super("ScoreWidgetIntentService");
@@ -68,20 +64,13 @@ public class ScoreWidgetIntentService extends IntentService {
             return;
         }
 
-        String homeName = cursor.getString(COL_HOME);
-        String awayName = cursor.getString(COL_AWAY);
-        int homeScore = cursor.getInt(COL_HOME_GOAL);
-        int awayScore = cursor.getInt(COL_AWAY_GOAL);
-
-        cursor.close();
-
         for (int appWidgetId : appWidgetIds) {
 
             RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.score_app_widget);
-            String scores = Utilies.getScores(homeScore, awayScore);
+            String scores = Utilies.getScores(cursor.getInt(COL_HOME_GOAL), cursor.getInt(COL_AWAY_GOAL));
 
-            views.setTextViewText(R.id.home_name, homeName);
-            views.setTextViewText(R.id.away_name, awayName);
+            views.setTextViewText(R.id.home_name, cursor.getString(COL_HOME));
+            views.setTextViewText(R.id.away_name, cursor.getString(COL_AWAY));
             views.setTextViewText(R.id.score_textview, scores);
 
             Intent launchIntent = new Intent(this, MainActivity.class);
@@ -91,6 +80,7 @@ public class ScoreWidgetIntentService extends IntentService {
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
 
+        cursor.close();
     }
     private int getWidgetWidth(AppWidgetManager appWidgetManager, int appWidgetId) {
         // Prior to Jelly Bean, widgets were always their default size

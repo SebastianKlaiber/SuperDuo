@@ -16,8 +16,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
             android:layout_gravity="center"
-            android:src="@drawable/ic_launcher"
-            />
+            android:src="@drawable/ic_launcher" />
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"
